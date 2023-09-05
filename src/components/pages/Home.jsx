@@ -3,12 +3,18 @@ import { ArticleContainer, MostPopularArticles } from "../";
 
 const Home = () => {
   return (
-    <div className="home-container">
+    <div className="home container">
       <h2 className="page-heading">Welcome to MSMI News</h2>
-      <h2>Latest News</h2>
-      <ArticleContainer />
-      <h2>Most popular articles</h2>
-      <MostPopularArticles />
+      <section className="home-grid">
+        <div className="home-grid-item">
+          <h2>Latest News</h2>
+          <ArticleContainer />
+        </div>
+        <div className="home-grid-item">
+          <h2>Most popular articles</h2>
+          <MostPopularArticles />
+        </div>
+      </section>
     </div>
   );
 };

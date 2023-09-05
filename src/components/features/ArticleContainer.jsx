@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { getArticles } from "../apiCalls";
 
-const ArticleContainer = () => {
+const ArticleContainer = ({ pageNumber }) => {
   const [articleList, setArticleList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
+  console.log(pageNumber);
+
   useEffect(() => {
     setIsLoading(true);
-    getArticles()
+    getArticles(undefined, pageNumber)
       .then((articles) => {
         setArticleList(articles);
         setIsLoading(false);
@@ -17,7 +19,7 @@ const ArticleContainer = () => {
         setIsError(true);
         setIsLoading(false);
       });
-  }, []);
+  }, [pageNumber]);
 
   if (isLoading) return <h3 className="loading-message">Loading...</h3>;
   if (isError)
@@ -34,6 +36,7 @@ const ArticleContainer = () => {
               <img
                 src={article.article_img_url}
                 alt={`${article.title} image`}
+                className="article-img"
               />
               <h3 className="article-title">{article.title}</h3>
               <p className="article-topic">{article.topic}</p>

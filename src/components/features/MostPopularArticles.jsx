@@ -24,10 +24,10 @@ const MostPopularArticles = () => {
       <ol className="articles-ol">
         {articleList.map((article) => {
           return (
-            <li className="article-card" key={article.article_id}>
-              <h3 className="article-title">{article.title}</h3>
-              <p className="article-topic">{article.topic}</p>
-              <p className="article-votes">Votes: {article.votes}</p>
+            <li className="pop-article-card" key={article.article_id}>
+              <h3 className="pop-article-title">{article.title}</h3>
+              <p className="pop-article-topic">{article.topic}</p>
+              <p className="pop-article-votes">Votes: {article.votes}</p>
             </li>
           );
         })}

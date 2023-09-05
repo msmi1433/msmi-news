@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="header-container">
+    <div className="header-container container">
       <h1 className="nav-title">MSMI News</h1>
       <nav className="navbar-container">
         <Link className="nav-item" to="/">
