@@ -7,12 +7,15 @@ const Comments = ({ articleId }) => {
   const [isError, setIsError] = useState(false);
 
   useState(() => {
+    setIsLoading(true);
     getArticleComments(articleId)
       .then((comments) => {
         setComments(comments);
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setIsError(true);
+        setIsLoading(false);
       });
   });
 
