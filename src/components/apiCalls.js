@@ -40,3 +40,12 @@ export const getArticleComments = (articleId) => {
     return data.comments;
   });
 };
+
+export const updateArticleVotes = (articleId, vote) => {
+  return newsApi.patch(`/articles/${articleId}`, { inc_votes: vote });
+};
+
+export const optRenderArticleVotes = (article, setArticle, votes) => {
+  article.votes += votes;
+  setArticle({ ...article });
+};
