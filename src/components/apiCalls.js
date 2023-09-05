@@ -17,8 +17,8 @@ export const getArticles = (sortBy = undefined, page = undefined) => {
     });
 };
 
-export const getNumOfArticles = () => {
+export const getNumOfPages = () => {
   return newsApi.get("/articles?limit=1000").then(({ data }) => {
-    return data.articles.length;
+    return Math.ceil(data.articles.length / 10);
   });
 };

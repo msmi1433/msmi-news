@@ -6,8 +6,6 @@ const ArticleContainer = ({ pageNumber }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  console.log(pageNumber);
-
   useEffect(() => {
     setIsLoading(true);
     getArticles(undefined, pageNumber)
