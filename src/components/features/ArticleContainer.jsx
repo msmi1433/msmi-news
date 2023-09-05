@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getArticles } from "../apiCalls";
+import { Link } from "react-router-dom";
 
 const ArticleContainer = ({ pageNumber }) => {
   const [articleList, setArticleList] = useState([]);
@@ -30,15 +31,20 @@ const ArticleContainer = ({ pageNumber }) => {
       <ol className="articles-ol">
         {articleList.map((article) => {
           return (
-            <li className="article-card" key={article.article_id}>
-              <img
-                src={article.article_img_url}
-                alt={`${article.title} image`}
-                className="article-img"
-              />
-              <h3 className="article-title">{article.title}</h3>
-              <p className="article-topic">{article.topic}</p>
-            </li>
+            <Link
+              to={`/articles/${article.article_id}`}
+              key={`article-link-${article.article_id}`}
+            >
+              <li className="article-card" key={article.article_id}>
+                <img
+                  src={article.article_img_url}
+                  alt={`${article.title} image`}
+                  className="article-img"
+                />
+                <h3 className="article-title">{article.title}</h3>
+                <p className="article-topic">{article.topic}</p>
+              </li>
+            </Link>
           );
         })}
       </ol>

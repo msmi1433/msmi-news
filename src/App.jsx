@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Home, Header, AllArticles } from "./components";
+import { Home, Header, AllArticles, SingleArticle } from "./components";
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/articles" element={<AllArticles />} />
+        <Route path="articles/:article_id" element={<SingleArticle />} />
       </Routes>
     </div>
   );
