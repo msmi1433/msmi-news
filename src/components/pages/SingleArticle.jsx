@@ -82,10 +82,22 @@ const SingleArticle = () => {
             })}
           </p>
           <p className="single-article votes">Article votes: {article.votes}</p>
-          <button className="upvote-button" onClick={handleArticleUpvote}>
+          <button
+            className="upvote-button"
+            onClick={(e) => {
+              e.currentTarget.disabled = true;
+              handleArticleUpvote();
+            }}
+          >
             Upvote 👍
           </button>
-          <button className="downvote-button" onClick={handleArticleDownvote}>
+          <button
+            className="downvote-button"
+            onClick={(e) => {
+              e.currentTarget.disabled = true;
+              handleArticleDownvote();
+            }}
+          >
             Downvote 👎
           </button>
         </div>
