@@ -34,3 +34,9 @@ export const getNumOfPages = () => {
     return Math.ceil(data.articles.length / 10);
   });
 };
+
+export const getArticleComments = (articleId) => {
+  return newsApi.get(`/articles/${articleId}/comments`).then(({ data }) => {
+    return data.comments;
+  });
+};

@@ -4,6 +4,7 @@ import ArticleContainer from "./features/ArticleContainer";
 import MostPopularArticles from "./features/MostPopularArticles";
 import AllArticles from "./pages/AllArticles";
 import SingleArticle from "./pages/SingleArticle";
+import Comments from "./features/Comments";
 
 export {
   Home,
@@ -12,4 +13,5 @@ export {
   MostPopularArticles,
   AllArticles,
   SingleArticle,
+  Comments,
 };
