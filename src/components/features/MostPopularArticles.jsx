@@ -19,6 +19,12 @@ const MostPopularArticles = () => {
       });
   }, []);
 
+  if (isLoading) return <p className="loading-message">Loading...</p>;
+  if (isError)
+    return (
+      <p className="error-message">Something went wrong - please try again</p>
+    );
+
   return (
     <section className="most-popular-articles">
       <ol className="articles-ol">
