@@ -75,3 +75,16 @@ h2 {
 .all-articles .article-img {
   width: 100%;
 }
+
+/* Single article page */
+
+.single-article.head {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  gap: 4em;
+}
+
+.single-article.image {
+  width: 75%;
+  padding: 10px 0px 10px 0px;
+}
