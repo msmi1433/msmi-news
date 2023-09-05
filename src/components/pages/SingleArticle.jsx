@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import { getArticleAuthor, getSingleArticle } from "../apiCalls";
 import { Link } from "react-router-dom";
+import { Comments } from "../";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -69,6 +70,8 @@ const SingleArticle = () => {
       <div className="single-article body">
         <p>{article.body}</p>
       </div>
+      <h2 className="comments-h2">Comments</h2>
+      <Comments articleId={article_id} />
     </section>
   );
 };
