@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { getArticleAuthor, getSingleArticle } from "../apiCalls";
+import {
+  getArticleAuthor,
+  getSingleArticle,
+  optRenderArticleVotes,
+  updateArticleVotes,
+} from "../apiCalls";
 import { Link } from "react-router-dom";
 import { Comments } from "../";
 
@@ -10,6 +15,20 @@ const SingleArticle = () => {
   const [isError, setIsError] = useState(false);
   const [article, setArticle] = useState({});
   const [author, setAuthor] = useState({});
+
+  const handleArticleUpvote = () => {
+    updateArticleVotes(article_id, 1).catch((err) => {
+      alert("Sorry, your vote could not be logged. Please try again later");
+    });
+    optRenderArticleVotes(article, setArticle, 1);
+  };
+
+  const handleArticleDownvote = () => {
+    updateArticleVotes(article_id, -1).catch((err) => {
+      alert("Sorry, your vote could not be logged. Please try again later");
+    });
+    optRenderArticleVotes(article, setArticle, -1);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -63,8 +82,12 @@ const SingleArticle = () => {
             })}
           </p>
           <p className="single-article votes">Article votes: {article.votes}</p>
-          <button className="upvote-button">Upvote 👍</button>
-          <button className="downvote-button">Downvote 👎</button>
+          <button className="upvote-button" onClick={handleArticleUpvote}>
+            Upvote 👍
+          </button>
+          <button className="downvote-button" onClick={handleArticleDownvote}>
+            Downvote 👎
+          </button>
         </div>
       </div>
       <div className="single-article body">
