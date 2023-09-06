@@ -1,13 +1,19 @@
 import axios from "axios";
+import moment from "moment";
 
 const newsApi = axios.create({
   baseURL: "https://msmi-news.onrender.com/api",
 });
 
-export const getArticles = (sortBy = undefined, page = undefined) => {
+export const getArticles = (
+  sortBy = undefined,
+  page = undefined,
+  category = undefined
+) => {
   return newsApi
     .get("/articles", {
       params: {
+        topic: category,
         sort_by: sortBy,
         page: page,
       },
@@ -29,10 +35,12 @@ export const getArticleAuthor = (author) => {
   });
 };
 
-export const getNumOfPages = () => {
-  return newsApi.get("/articles?limit=1000").then(({ data }) => {
-    return Math.ceil(data.articles.length / 10);
-  });
+export const getNumOfPages = (category = undefined) => {
+  return newsApi
+    .get("/articles", { params: { topic: category, limit: 1000 } })
+    .then(({ data }) => {
+      return Math.ceil(data.articles.length / 10);
+    });
 };
 
 export const getArticleComments = (articleId) => {
@@ -73,10 +81,15 @@ export const optRenderComment = (currComments, body, username, setComments) => {
   setComments([
     {
       author: username,
-      created_at: new Date().toISOString(),
+      created_at: Date.now(),
       body: body,
       votes: 0,
     },
     ...currComments,
   ]);
+};
+
+export const getTimeSince = (created_at) => {
+  const date = new Date(created_at);
+  return moment(date).fromNow();
 };

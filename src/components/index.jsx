@@ -7,6 +7,7 @@ import SingleArticle from "./pages/SingleArticle";
 import Comments from "./features/Comments";
 import { UserContext } from "./contexts/UserContext";
 import AllUsers from "./pages/AllUsers";
+import ArticlesByCategory from "./pages/ArticlesByCategory";
 
 export {
   Home,
@@ -18,4 +19,5 @@ export {
   Comments,
   UserContext,
   AllUsers,
+  ArticlesByCategory,
 };
