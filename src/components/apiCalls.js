@@ -93,3 +93,18 @@ export const getTimeSince = (created_at) => {
   const date = new Date(created_at);
   return moment(date).fromNow();
 };
+
+export const deleteComment = (commentId) => {
+  return newsApi.delete(`/comments/${commentId}`);
+};
+
+export const optRenderCommentDelete = (
+  currComments,
+  commentId,
+  setComments
+) => {
+  const filtered = currComments.filter(
+    (comment) => comment.comment_id !== commentId
+  );
+  setComments(filtered);
+};

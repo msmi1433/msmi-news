@@ -4,6 +4,8 @@ import {
   optRenderComment,
   postComment,
   getTimeSince,
+  deleteComment,
+  optRenderCommentDelete,
 } from "../apiCalls";
 import { UserContext } from "../";
 
@@ -13,6 +15,15 @@ const Comments = ({ articleId }) => {
   const [isError, setIsError] = useState(false);
   const [newComment, setNewComment] = useState("");
   const { user } = useContext(UserContext);
+
+  const handleCommentDelete = (commentId, currComments, setComments) => {
+    deleteComment(commentId).catch((err) =>
+      alert(
+        "Your comment could not be deleted. Please refresh the page and try again"
+      )
+    );
+    optRenderCommentDelete(currComments, commentId, setComments);
+  };
 
   useState(() => {
     setIsLoading(true);
@@ -71,6 +82,8 @@ const Comments = ({ articleId }) => {
       <section className="list-comments">
         <ol className="comments-ol">
           {comments.map((comment) => {
+            const isOwnComment =
+              comment.author === user.username ? true : false;
             return (
               <li key={comment.comment_id} className="comment-card">
                 <h4 className="commenter-name">@{comment.author}</h4>
@@ -81,6 +94,20 @@ const Comments = ({ articleId }) => {
                 <p className="comment-votes">Votes: {comment.votes}</p>
                 <button className="comment-upvote">👍</button>
                 <button className="comment-downvote">👎</button>
+                {isOwnComment ? (
+                  <button
+                    className="comment-delete"
+                    onClick={() => {
+                      handleCommentDelete(
+                        comment.comment_id,
+                        comments,
+                        setComments
+                      );
+                    }}
+                  >
+                    Delete comment
+                  </button>
+                ) : null}
               </li>
             );
           })}
