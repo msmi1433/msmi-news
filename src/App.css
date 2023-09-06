@@ -42,6 +42,35 @@ h2 {
   padding-bottom: 10px;
 }
 
+.logged-in-user {
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  align-self: center;
+  margin-left: auto;
+}
+
+.img-cropper {
+  align-self: center;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px black solid;
+  text-align: center;
+}
+
+.img-cropper > img {
+  display: inline;
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+.logged-in-user-name {
+  align-self: center;
+}
 /* Home page */
 
 .home-grid {
@@ -94,4 +123,44 @@ h2 {
   display: flex;
   flex-flow: column;
   gap: 1.5em;
+}
+
+/* Users page */
+
+.users-flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.user-card {
+  text-align: center;
+}
+
+.user-login-img-container {
+  align-self: center;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px black solid;
+  text-align: center;
+  margin: 2.5px;
+}
+
+.user-login-img-container > img {
+  margin: 0 auto;
+  height: 100%;
+  width: auto;
+}
+
+.users-username {
+  margin: 2.5px;
+}
+
+.user-login.button {
+  margin: 2.5px;
+  padding: 5px;
 }

@@ -1,7 +1,13 @@
 import { useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { Home, Header, AllArticles, SingleArticle } from "./components";
+import {
+  Home,
+  Header,
+  AllArticles,
+  SingleArticle,
+  AllUsers,
+} from "./components";
 
 function App() {
   return (
@@ -11,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/articles" element={<AllArticles />} />
         <Route path="articles/:article_id" element={<SingleArticle />} />
+        <Route path="/users" element={<AllUsers />} />
       </Routes>
     </div>
   );

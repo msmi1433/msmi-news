@@ -49,3 +49,15 @@ export const optRenderArticleVotes = (article, setArticle, votes) => {
   article.votes += votes;
   setArticle({ ...article });
 };
+
+export const getUserList = () => {
+  return newsApi.get("/users").then(({ data }) => {
+    return data.users;
+  });
+};
+
+export const getUser = (username) => {
+  return newsApi.get(`/users/${username}`).then(({ data }) => {
+    return data.user;
+  });
+};
