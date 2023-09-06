@@ -15,10 +15,8 @@ const Header = () => {
         <Link className="news nav-item" to="/articles">
           All Articles
         </Link>
-        <Link className="news nav-item" to="/users">
-          Users
-        </Link>
-        {/* <Link className="news nav-item" to="/articles/football">
+
+        <Link className="news nav-item" to="/articles/football">
           Football
         </Link>
         <Link className="news nav-item" to="/articles/coding">
@@ -26,7 +24,10 @@ const Header = () => {
         </Link>
         <Link className="news nav-item" to="/articles/cooking">
           Cooking
-        </Link> */}
+        </Link>
+        <Link className="news nav-item" to="/users">
+          Users
+        </Link>
       </nav>
       <div className="logged-in-user">
         <div className="img-cropper">

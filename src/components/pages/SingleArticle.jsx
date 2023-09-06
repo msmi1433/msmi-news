@@ -15,7 +15,6 @@ const SingleArticle = () => {
   const [isError, setIsError] = useState(false);
   const [article, setArticle] = useState({});
   const [author, setAuthor] = useState({});
-  const { user, setUser } = useContext(UserContext);
 
   const handleArticleUpvote = () => {
     updateArticleVotes(article_id, 1).catch((err) => {
