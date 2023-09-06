@@ -6,10 +6,12 @@ const ArticleContainer = ({ pageNumber, category }) => {
   const [articleList, setArticleList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [sortBy, setSortBy] = useState("created_at");
+  const [orderBy, setOrderBy] = useState("DESC");
 
   useEffect(() => {
     setIsLoading(true);
-    getArticles(undefined, pageNumber, category)
+    getArticles(sortBy, pageNumber, category, orderBy)
       .then((articles) => {
         setArticleList(articles);
         setIsLoading(false);
@@ -18,7 +20,7 @@ const ArticleContainer = ({ pageNumber, category }) => {
         setIsError(true);
         setIsLoading(false);
       });
-  }, [pageNumber, category]);
+  }, [pageNumber, category, sortBy, orderBy]);
 
   if (isLoading) return <h3 className="loading-message">Loading...</h3>;
   if (isError)
@@ -28,6 +30,27 @@ const ArticleContainer = ({ pageNumber, category }) => {
 
   return (
     <section className="article-container">
+      <select
+        defaultValue={sortBy}
+        className="sort-by selector"
+        onChange={(e) => {
+          setSortBy(e.target.value);
+        }}
+      >
+        <option value="created_at">Date published</option>
+        <option value="comment_count">Comment count</option>
+        <option value="votes">Votes</option>
+      </select>
+      <select
+        defaultValue={orderBy}
+        className="order-by selector"
+        onChange={(e) => {
+          setOrderBy(e.target.value);
+        }}
+      >
+        <option value="DESC">Descending</option>
+        <option value="ASC">Ascending</option>
+      </select>
       <ol className="articles-ol">
         {articleList.map((article) => {
           return (

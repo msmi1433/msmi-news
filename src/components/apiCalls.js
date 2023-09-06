@@ -8,7 +8,8 @@ const newsApi = axios.create({
 export const getArticles = (
   sortBy = undefined,
   page = undefined,
-  category = undefined
+  category = undefined,
+  orderBy = undefined
 ) => {
   return newsApi
     .get("/articles", {
@@ -16,6 +17,7 @@ export const getArticles = (
         topic: category,
         sort_by: sortBy,
         page: page,
+        order: orderBy,
       },
     })
     .then(({ data }) => {
