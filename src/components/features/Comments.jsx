@@ -1,5 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { getArticleComments, optRenderComment, postComment } from "../apiCalls";
+import {
+  getArticleComments,
+  optRenderComment,
+  postComment,
+  getTimeSince,
+} from "../apiCalls";
 import { UserContext } from "../";
 
 const Comments = ({ articleId }) => {
@@ -19,6 +24,9 @@ const Comments = ({ articleId }) => {
       .catch((err) => {
         setIsError(true);
         setIsLoading(false);
+        alert(
+          "Sorry - your comment could not be posted at this time; please try again later."
+        );
       });
   });
 
@@ -27,8 +35,6 @@ const Comments = ({ articleId }) => {
     return (
       <p className="error-message">Something went wrong - please try again</p>
     );
-
-  console.log(comments);
 
   return (
     <section className="comments container">
@@ -69,12 +75,7 @@ const Comments = ({ articleId }) => {
               <li key={comment.comment_id} className="comment-card">
                 <h4 className="commenter-name">@{comment.author}</h4>
                 <p className="comment-posted">
-                  {new Date(comment.created_at).toLocaleDateString({
-                    weekday: "long",
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
+                  {getTimeSince(comment.created_at)}
                 </p>
                 <p className="comment-body">{comment.body}</p>
                 <p className="comment-votes">Votes: {comment.votes}</p>

@@ -39,11 +39,7 @@ const ArticlesByCategory = () => {
       <button className="page-button" onClick={handleNextClick}>
         Next page
       </button>
-      <ArticleContainer
-        pageNumber={pageNumber}
-        category={category}
-        setPageNumber={setPageNumber}
-      />
+      <ArticleContainer pageNumber={pageNumber} category={category} />
       <p className="page-number">{`Page ${pageNumber}`}</p>
     </section>
   );

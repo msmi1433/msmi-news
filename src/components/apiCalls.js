@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 
 const newsApi = axios.create({
   baseURL: "https://msmi-news.onrender.com/api",
@@ -80,10 +81,15 @@ export const optRenderComment = (currComments, body, username, setComments) => {
   setComments([
     {
       author: username,
-      created_at: new Date().toISOString(),
+      created_at: Date.now(),
       body: body,
       votes: 0,
     },
     ...currComments,
   ]);
+};
+
+export const getTimeSince = (created_at) => {
+  const date = new Date(created_at);
+  return moment(date).fromNow();
 };
