@@ -119,10 +119,20 @@ h2 {
 }
 
 /* Comments */
+.comments {
+  display: flex;
+  flex-flow: column;
+  gap: 1.5em;
+}
+
 .comments-ol {
   display: flex;
   flex-flow: column;
   gap: 1.5em;
+}
+
+.comment-input {
+  width: 100%;
 }
 
 /* Users page */

@@ -61,3 +61,22 @@ export const getUser = (username) => {
     return data.user;
   });
 };
+
+export const postComment = (articleId, username, body) => {
+  return newsApi.post(`/articles/${articleId}/comments`, {
+    username: username,
+    body: body,
+  });
+};
+
+export const optRenderComment = (currComments, body, username, setComments) => {
+  setComments([
+    {
+      author: username,
+      created_at: new Date().toISOString(),
+      body: body,
+      votes: 0,
+    },
+    ...currComments,
+  ]);
+};
