@@ -34,10 +34,12 @@ export const getArticleAuthor = (author) => {
   });
 };
 
-export const getNumOfPages = () => {
-  return newsApi.get("/articles?limit=1000").then(({ data }) => {
-    return Math.ceil(data.articles.length / 10);
-  });
+export const getNumOfPages = (category = undefined) => {
+  return newsApi
+    .get("/articles", { params: { topic: category, limit: 1000 } })
+    .then(({ data }) => {
+      return Math.ceil(data.articles.length / 10);
+    });
 };
 
 export const getArticleComments = (articleId) => {

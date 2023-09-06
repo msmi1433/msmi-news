@@ -16,13 +16,13 @@ const Header = () => {
           All Articles
         </Link>
 
-        <Link className="news nav-item" to="/articles/football">
+        <Link className="news nav-item" to="/articles/topic/football">
           Football
         </Link>
-        <Link className="news nav-item" to="/articles/coding">
+        <Link className="news nav-item" to="/articles/topic/coding">
           Coding
         </Link>
-        <Link className="news nav-item" to="/articles/cooking">
+        <Link className="news nav-item" to="/articles/topic/cooking">
           Cooking
         </Link>
         <Link className="news nav-item" to="/users">

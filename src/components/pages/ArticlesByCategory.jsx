@@ -25,10 +25,10 @@ const ArticlesByCategory = () => {
   };
 
   useEffect(() => {
-    getNumOfPages().then((num) => {
+    getNumOfPages(category).then((num) => {
       setNumOfPages(num);
     });
-  }, [category]);
+  }, []);
 
   return (
     <section className="all-articles container">
@@ -39,7 +39,11 @@ const ArticlesByCategory = () => {
       <button className="page-button" onClick={handleNextClick}>
         Next page
       </button>
-      <ArticleContainer pageNumber={pageNumber} category={category} />
+      <ArticleContainer
+        pageNumber={pageNumber}
+        category={category}
+        setPageNumber={setPageNumber}
+      />
       <p className="page-number">{`Page ${pageNumber}`}</p>
     </section>
   );
