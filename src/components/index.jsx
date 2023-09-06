@@ -5,6 +5,8 @@ import MostPopularArticles from "./features/MostPopularArticles";
 import AllArticles from "./pages/AllArticles";
 import SingleArticle from "./pages/SingleArticle";
 import Comments from "./features/Comments";
+import { UserContext } from "./contexts/UserContext";
+import AllUsers from "./pages/AllUsers";
 
 export {
   Home,
@@ -14,4 +16,6 @@ export {
   AllArticles,
   SingleArticle,
   Comments,
+  UserContext,
+  AllUsers,
 };

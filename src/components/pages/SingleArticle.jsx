@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router";
 import {
   getArticleAuthor,
@@ -7,7 +7,7 @@ import {
   updateArticleVotes,
 } from "../apiCalls";
 import { Link } from "react-router-dom";
-import { Comments } from "../";
+import { Comments, UserContext } from "../";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -15,6 +15,7 @@ const SingleArticle = () => {
   const [isError, setIsError] = useState(false);
   const [article, setArticle] = useState({});
   const [author, setAuthor] = useState({});
+  const { user, setUser } = useContext(UserContext);
 
   const handleArticleUpvote = () => {
     updateArticleVotes(article_id, 1).catch((err) => {

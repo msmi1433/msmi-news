@@ -49,3 +49,34 @@ export const optRenderArticleVotes = (article, setArticle, votes) => {
   article.votes += votes;
   setArticle({ ...article });
 };
+
+export const getUserList = () => {
+  return newsApi.get("/users").then(({ data }) => {
+    return data.users;
+  });
+};
+
+export const getUser = (username) => {
+  return newsApi.get(`/users/${username}`).then(({ data }) => {
+    return data.user;
+  });
+};
+
+export const postComment = (articleId, username, body) => {
+  return newsApi.post(`/articles/${articleId}/comments`, {
+    username: username,
+    body: body,
+  });
+};
+
+export const optRenderComment = (currComments, body, username, setComments) => {
+  setComments([
+    {
+      author: username,
+      created_at: new Date().toISOString(),
+      body: body,
+      votes: 0,
+    },
+    ...currComments,
+  ]);
+};
