@@ -25,7 +25,7 @@ const Comments = ({ articleId }) => {
     optRenderCommentDelete(currComments, commentId, setComments);
   };
 
-  useState(() => {
+  useEffect(() => {
     setIsLoading(true);
     getArticleComments(articleId)
       .then((comments) => {
@@ -35,11 +35,8 @@ const Comments = ({ articleId }) => {
       .catch((err) => {
         setIsError(true);
         setIsLoading(false);
-        alert(
-          "Sorry - your comment could not be posted at this time; please try again later."
-        );
       });
-  });
+  }, []);
 
   if (isLoading) return <p className="loading-message">Comments loading...</p>;
   if (isError)
@@ -65,7 +62,11 @@ const Comments = ({ articleId }) => {
             className="comment-button"
             onClick={(e) => {
               e.preventDefault();
-              postComment(articleId, user.username, newComment);
+              postComment(articleId, user.username, newComment).catch((err) => {
+                alert(
+                  "Sorry - your comment could not be posted at this time; please try again later."
+                );
+              });
               optRenderComment(
                 comments,
                 newComment,
