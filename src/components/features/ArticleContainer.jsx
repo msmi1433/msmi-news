@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { getArticles } from "../apiCalls";
 import { Link } from "react-router-dom";
 
-const ArticleContainer = ({ pageNumber }) => {
+const ArticleContainer = ({ pageNumber, category }) => {
   const [articleList, setArticleList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    getArticles(undefined, pageNumber)
+    getArticles(undefined, pageNumber, category)
       .then((articles) => {
         setArticleList(articles);
         setIsLoading(false);
@@ -18,7 +18,7 @@ const ArticleContainer = ({ pageNumber }) => {
         setIsError(true);
         setIsLoading(false);
       });
-  }, [pageNumber]);
+  }, [pageNumber, category]);
 
   if (isLoading) return <h3 className="loading-message">Loading...</h3>;
   if (isError)

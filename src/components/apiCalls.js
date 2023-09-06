@@ -4,10 +4,15 @@ const newsApi = axios.create({
   baseURL: "https://msmi-news.onrender.com/api",
 });
 
-export const getArticles = (sortBy = undefined, page = undefined) => {
+export const getArticles = (
+  sortBy = undefined,
+  page = undefined,
+  category = undefined
+) => {
   return newsApi
     .get("/articles", {
       params: {
+        topic: category,
         sort_by: sortBy,
         page: page,
       },

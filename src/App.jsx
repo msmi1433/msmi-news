@@ -7,6 +7,7 @@ import {
   AllArticles,
   SingleArticle,
   AllUsers,
+  ArticlesByCategory,
 } from "./components";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/articles" element={<AllArticles />} />
+        <Route path="/articles/:category" element={<ArticlesByCategory />} />
         <Route path="articles/:article_id" element={<SingleArticle />} />
         <Route path="/users" element={<AllUsers />} />
       </Routes>
