@@ -8,6 +8,7 @@ import Comments from "./features/Comments";
 import { UserContext } from "./contexts/UserContext";
 import AllUsers from "./pages/AllUsers";
 import ArticlesByCategory from "./pages/ArticlesByCategory";
+import PathNotFound from "./pages/PathNotFound";
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   UserContext,
   AllUsers,
   ArticlesByCategory,
+  PathNotFound,
 };

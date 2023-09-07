@@ -8,6 +8,7 @@ import {
   SingleArticle,
   AllUsers,
   ArticlesByCategory,
+  PathNotFound,
 } from "./components";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           element={<ArticlesByCategory />}
         />
         <Route path="/users" element={<AllUsers />} />
+        <Route path="*" element={<PathNotFound />} />
       </Routes>
     </div>
   );
