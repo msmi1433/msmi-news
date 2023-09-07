@@ -1,45 +1,59 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../";
 
 const Header = () => {
   const { user } = useContext(UserContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
 
   return (
-    <div className="header-container container">
-      <h1 className="nav-title">MSMI News</h1>
-      <nav className="navbar-container">
-        <Link className="nav-item" to="/">
-          Home
+    <section className="header container">
+      <div className="title-container">
+        <h1 className="nav-title">MSMI News</h1>
+        <Link className="logged-in-user" to="/users">
+          <div className="img-cropper">
+            <img
+              src={user.avatar_url}
+              alt={`${user.username}'s avatar image`}
+              className="logged-in-user-avatar"
+            />
+          </div>
+          <p className="logged-in-user-name">{user.username}</p>
         </Link>
-        <Link className="news nav-item" to="/articles">
-          All Articles
-        </Link>
-
-        <Link className="news nav-item" to="/articles/topic/football">
-          Football
-        </Link>
-        <Link className="news nav-item" to="/articles/topic/coding">
-          Coding
-        </Link>
-        <Link className="news nav-item" to="/articles/topic/cooking">
-          Cooking
-        </Link>
-        <Link className="news nav-item" to="/users">
-          Users
-        </Link>
-      </nav>
-      <div className="logged-in-user">
-        <div className="img-cropper">
-          <img
-            src={user.avatar_url}
-            alt={`${user.username}'s avatar image`}
-            className="logged-in-user-avatar"
-          />
-        </div>
-        <p className="logged-in-user-name">{user.username}</p>
       </div>
-    </div>
+      <div className="nav-container">
+        <nav className="navbar-container">
+          <Link className="nav-item" to="/">
+            Home
+          </Link>
+          <Link className="news nav-item" to="/articles">
+            All Articles
+          </Link>
+          <div
+            className={`dropdown nav-item ${dropdownOpen ? "open" : ""}`}
+            onMouseEnter={toggleDropdown}
+            onMouseLeave={toggleDropdown}
+          >
+            <p className="nav-item">Topics</p>
+            <div className={`dropdown-content ${dropdownOpen ? "show" : ""}`}>
+              <Link className="news nav-item" to="/articles/topic/football">
+                Football
+              </Link>
+              <Link className="news nav-item" to="/articles/topic/coding">
+                Coding
+              </Link>
+              <Link className="news nav-item" to="/articles/topic/cooking">
+                Cooking
+              </Link>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </section>
   );
 };
 

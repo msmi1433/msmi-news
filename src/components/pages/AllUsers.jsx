@@ -6,17 +6,22 @@ import { Link } from "react-router-dom";
 const AllUsers = () => {
   const [userList, setUserList] = useState([]);
   const { user, setUser } = useContext(UserContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getUserList()
       .then((users) => {
         return users.filter((userX) => userX.username !== user.username);
       })
       .then((filteredUsers) => {
         setUserList(filteredUsers);
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setIsError(true);
+        setIsLoading(false);
       });
   }, [user]);
 
@@ -25,6 +30,17 @@ const AllUsers = () => {
       setUser(newUser);
     });
   };
+
+  if (isLoading) return <h3 className="loading-message">Loading...</h3>;
+  if (isError) {
+    return (
+      <section className="article error">
+        <h3 className="error-message">
+          404 - Users could not be loaded; please refresh the page
+        </h3>
+      </section>
+    );
+  }
 
   return (
     <section className="all-users container">

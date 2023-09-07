@@ -8,6 +8,7 @@ const ArticlesByCategory = () => {
   let [pageNumber, setPageNumber] = useState(1);
   const [numOfPages, setNumOfPages] = useState(0);
   const [errStatus, setErrStatus] = useState("");
+  const [categoryState, setCategoryState] = useState(category);
 
   const handleNextClick = () => {
     if (pageNumber < numOfPages) {
@@ -26,6 +27,8 @@ const ArticlesByCategory = () => {
   };
 
   useEffect(() => {
+    setCategoryState(category);
+    setPageNumber(1);
     setErrStatus("");
     getNumOfPages(category).then((num) => {
       setNumOfPages(num);
@@ -51,7 +54,7 @@ const ArticlesByCategory = () => {
       </button>
       <ArticleContainer
         pageNumber={pageNumber}
-        category={category}
+        categoryState={categoryState}
         setErrStatus={setErrStatus}
       />
       <p className="page-number">{`Page ${pageNumber}`}</p>

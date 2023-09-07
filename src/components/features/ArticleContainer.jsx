@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getArticles } from "../apiCalls";
+import { getArticles, getTimeSince } from "../apiCalls";
 import { Link } from "react-router-dom";
 
-const ArticleContainer = ({ pageNumber, category, setErrStatus }) => {
+const ArticleContainer = ({ pageNumber, categoryState, setErrStatus }) => {
   const [articleList, setArticleList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -12,8 +12,11 @@ const ArticleContainer = ({ pageNumber, category, setErrStatus }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    getArticles(sortBy, pageNumber, category, orderBy)
+    getArticles(sortBy, pageNumber, categoryState, orderBy)
       .then((articles) => {
+        if (pathname === "/") {
+          articles.pop();
+        }
         setArticleList(articles);
         setIsLoading(false);
       })
@@ -22,7 +25,7 @@ const ArticleContainer = ({ pageNumber, category, setErrStatus }) => {
         setIsError(true);
         setIsLoading(false);
       });
-  }, [pageNumber, category, sortBy, orderBy]);
+  }, [pageNumber, categoryState, sortBy, orderBy]);
 
   if (isLoading) return <h3 className="loading-message">Loading...</h3>;
   if (isError)
@@ -63,6 +66,7 @@ const ArticleContainer = ({ pageNumber, category, setErrStatus }) => {
             <Link
               to={`/articles/${article.article_id}`}
               key={`article-link-${article.article_id}`}
+              className="article-card-link"
             >
               <li className="article-card" key={article.article_id}>
                 <img
@@ -71,8 +75,14 @@ const ArticleContainer = ({ pageNumber, category, setErrStatus }) => {
                   className="article-img"
                 />
                 <h3 className="article-title">{article.title}</h3>
-                <p className="article-topic">{article.topic}</p>
               </li>
+              <div className="article-card-footer">
+                <p className="article-created-at">
+                  {new Date(article.created_at).toLocaleDateString()}
+                </p>
+                <p>&nbsp;|&nbsp;</p>
+                <p className="article-topic">{article.topic}</p>
+              </div>
             </Link>
           );
         })}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getArticles } from "../apiCalls";
+import { Link } from "react-router-dom";
 
 const MostPopularArticles = () => {
   const [articleList, setArticleList] = useState([]);
@@ -30,11 +31,15 @@ const MostPopularArticles = () => {
       <ol className="articles-ol">
         {articleList.map((article) => {
           return (
-            <li className="pop-article-card" key={article.article_id}>
+            <Link
+              to={`/articles/${article.article_id}`}
+              className="pop-article-card"
+              key={article.article_id}
+            >
               <h3 className="pop-article-title">{article.title}</h3>
               <p className="pop-article-topic">{article.topic}</p>
               <p className="pop-article-votes">Votes: {article.votes}</p>
-            </li>
+            </Link>
           );
         })}
       </ol>
