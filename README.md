@@ -19,10 +19,11 @@ API endpoints are outlined [here](https://msmi-news.onrender.com/api/).
 To run the app locally, please execute the following terminal commands:
 
 1. `git clone https://github.com/msmi1433/msmi-news.git`
-2. `npm install`
-3. `npm run dev`
+2. `cd msmi-news`
+3. `npm install`
+4. `npm run dev`
 
-You can then click the link that appears in your terminal.
+You can then click the link that appears in your terminal to launch the app in your browser.
 
 ## Stack
 
