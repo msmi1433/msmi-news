@@ -108,3 +108,20 @@ export const optRenderCommentDelete = (
   );
   setComments(filtered);
 };
+
+export const updateCommentVotes = (commentId, vote) => {
+  return newsApi.patch(`/comments/${commentId}`, { inc_votes: vote });
+};
+
+export const optRenderCommentVotes = (
+  commentId,
+  vote,
+  comments,
+  setComments
+) => {
+  const commentToUpdate = comments.find(
+    (comment) => comment.comment_id === commentId
+  );
+  commentToUpdate.votes += vote;
+  setComments([...comments]);
+};

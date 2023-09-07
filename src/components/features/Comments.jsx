@@ -6,6 +6,8 @@ import {
   getTimeSince,
   deleteComment,
   optRenderCommentDelete,
+  updateCommentVotes,
+  optRenderCommentVotes,
 } from "../apiCalls";
 import { UserContext } from "../";
 
@@ -15,6 +17,20 @@ const Comments = ({ articleId }) => {
   const [isError, setIsError] = useState(false);
   const [newComment, setNewComment] = useState("");
   const { user } = useContext(UserContext);
+
+  const handleUpvote = (commentId) => {
+    updateCommentVotes(commentId, 1).catch((err) => {
+      alert("Sorry, your comment vote could not be posted. Please try again");
+    });
+    optRenderCommentVotes(commentId, 1, comments, setComments);
+  };
+
+  const handleDownvote = (commentId) => {
+    updateCommentVotes(commentId, -1).catch((err) => {
+      alert("Sorry, your comment vote could not be posted. Please try again");
+    });
+    optRenderCommentVotes(commentId, -1, comments, setComments);
+  };
 
   const handleCommentDelete = (commentId, currComments, setComments) => {
     deleteComment(commentId).catch((err) =>
@@ -93,8 +109,22 @@ const Comments = ({ articleId }) => {
                 </p>
                 <p className="comment-body">{comment.body}</p>
                 <p className="comment-votes">Votes: {comment.votes}</p>
-                <button className="comment-upvote">👍</button>
-                <button className="comment-downvote">👎</button>
+                <button
+                  onClick={() => {
+                    handleUpvote(comment.comment_id);
+                  }}
+                  className="comment-upvote"
+                >
+                  👍
+                </button>
+                <button
+                  onClick={() => {
+                    handleDownvote(comment.comment_id);
+                  }}
+                  className="comment-downvote"
+                >
+                  👎
+                </button>
                 {isOwnComment ? (
                   <button
                     className="comment-delete"
