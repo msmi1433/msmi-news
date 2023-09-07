@@ -2,7 +2,7 @@
 
 This project provides the user with an interactive news website, utilising an API created with Express.js.
 
-The app allows users to read various news articles, with filtering and sort options available. Users can also interact with articles by voting on them and posting comments. Comments also have a votes feature and can be deleted when logged in as the user that posted the comment (user selection is implemented without authentication).
+The app allows users to read various news articles, with filtering and sort options available. Users can also interact with articles by voting on them and posting comments. Comments have a votes feature and can be deleted when logged in as the user that posted the comment (user selection is implemented without authentication).
 
 ## Accessing the app
 
