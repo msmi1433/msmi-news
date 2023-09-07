@@ -4,6 +4,10 @@ import {
   optRenderComment,
   postComment,
   getTimeSince,
+  deleteComment,
+  optRenderCommentDelete,
+  updateCommentVotes,
+  optRenderCommentVotes,
 } from "../apiCalls";
 import { UserContext } from "../";
 
@@ -14,7 +18,30 @@ const Comments = ({ articleId }) => {
   const [newComment, setNewComment] = useState("");
   const { user } = useContext(UserContext);
 
-  useState(() => {
+  const handleUpvote = (commentId) => {
+    updateCommentVotes(commentId, 1).catch((err) => {
+      alert("Sorry, your comment vote could not be posted. Please try again");
+    });
+    optRenderCommentVotes(commentId, 1, comments, setComments);
+  };
+
+  const handleDownvote = (commentId) => {
+    updateCommentVotes(commentId, -1).catch((err) => {
+      alert("Sorry, your comment vote could not be posted. Please try again");
+    });
+    optRenderCommentVotes(commentId, -1, comments, setComments);
+  };
+
+  const handleCommentDelete = (commentId, currComments, setComments) => {
+    deleteComment(commentId).catch((err) =>
+      alert(
+        "Your comment could not be deleted. Please refresh the page and try again"
+      )
+    );
+    optRenderCommentDelete(currComments, commentId, setComments);
+  };
+
+  useEffect(() => {
     setIsLoading(true);
     getArticleComments(articleId)
       .then((comments) => {
@@ -24,11 +51,8 @@ const Comments = ({ articleId }) => {
       .catch((err) => {
         setIsError(true);
         setIsLoading(false);
-        alert(
-          "Sorry - your comment could not be posted at this time; please try again later."
-        );
       });
-  });
+  }, []);
 
   if (isLoading) return <p className="loading-message">Comments loading...</p>;
   if (isError)
@@ -54,7 +78,11 @@ const Comments = ({ articleId }) => {
             className="comment-button"
             onClick={(e) => {
               e.preventDefault();
-              postComment(articleId, user.username, newComment);
+              postComment(articleId, user.username, newComment).catch((err) => {
+                alert(
+                  "Sorry - your comment could not be posted at this time; please try again later."
+                );
+              });
               optRenderComment(
                 comments,
                 newComment,
@@ -71,6 +99,8 @@ const Comments = ({ articleId }) => {
       <section className="list-comments">
         <ol className="comments-ol">
           {comments.map((comment) => {
+            const isOwnComment =
+              comment.author === user.username ? true : false;
             return (
               <li key={comment.comment_id} className="comment-card">
                 <h4 className="commenter-name">@{comment.author}</h4>
@@ -79,8 +109,36 @@ const Comments = ({ articleId }) => {
                 </p>
                 <p className="comment-body">{comment.body}</p>
                 <p className="comment-votes">Votes: {comment.votes}</p>
-                <button className="comment-upvote">👍</button>
-                <button className="comment-downvote">👎</button>
+                <button
+                  onClick={() => {
+                    handleUpvote(comment.comment_id);
+                  }}
+                  className="comment-upvote"
+                >
+                  👍
+                </button>
+                <button
+                  onClick={() => {
+                    handleDownvote(comment.comment_id);
+                  }}
+                  className="comment-downvote"
+                >
+                  👎
+                </button>
+                {isOwnComment ? (
+                  <button
+                    className="comment-delete"
+                    onClick={() => {
+                      handleCommentDelete(
+                        comment.comment_id,
+                        comments,
+                        setComments
+                      );
+                    }}
+                  >
+                    Delete comment
+                  </button>
+                ) : null}
               </li>
             );
           })}
