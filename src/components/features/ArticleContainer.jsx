@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getArticles } from "../apiCalls";
 import { Link } from "react-router-dom";
 
-const ArticleContainer = ({ pageNumber, category }) => {
+const ArticleContainer = ({ pageNumber, category, setErrStatus }) => {
   const [articleList, setArticleList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -18,6 +18,7 @@ const ArticleContainer = ({ pageNumber, category }) => {
         setIsLoading(false);
       })
       .catch((err) => {
+        setErrStatus(err.response.data.msg);
         setIsError(true);
         setIsLoading(false);
       });

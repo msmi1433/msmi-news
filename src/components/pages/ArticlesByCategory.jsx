@@ -7,6 +7,7 @@ const ArticlesByCategory = () => {
   const { category } = useParams();
   let [pageNumber, setPageNumber] = useState(1);
   const [numOfPages, setNumOfPages] = useState(0);
+  const [errStatus, setErrStatus] = useState("");
 
   const handleNextClick = () => {
     if (pageNumber < numOfPages) {
@@ -25,10 +26,19 @@ const ArticlesByCategory = () => {
   };
 
   useEffect(() => {
+    setErrStatus("");
     getNumOfPages(category).then((num) => {
       setNumOfPages(num);
     });
-  }, []);
+  }, [category]);
+
+  if (errStatus === "topic does not exist") {
+    return (
+      <section className="error container">
+        <h3>Sorry, this topic does not exist</h3>
+      </section>
+    );
+  }
 
   return (
     <section className="all-articles container">
@@ -39,7 +49,11 @@ const ArticlesByCategory = () => {
       <button className="page-button" onClick={handleNextClick}>
         Next page
       </button>
-      <ArticleContainer pageNumber={pageNumber} category={category} />
+      <ArticleContainer
+        pageNumber={pageNumber}
+        category={category}
+        setErrStatus={setErrStatus}
+      />
       <p className="page-number">{`Page ${pageNumber}`}</p>
     </section>
   );

@@ -51,10 +51,14 @@ const SingleArticle = () => {
   }, []);
 
   if (isLoading) return <h3 className="loading-message">Loading...</h3>;
-  if (isError)
+  if (isError) {
     return (
-      <h3 className="error-message">Something went wrong - please try again</h3>
+      <section className="article error">
+        <h3 className="error-message">404 - This article does not exist</h3>
+        <Link to={"/articles"}>Go to all articles</Link>
+      </section>
     );
+  }
 
   return (
     <section className="single-article container">

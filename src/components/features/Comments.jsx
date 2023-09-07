@@ -20,14 +20,18 @@ const Comments = ({ articleId }) => {
 
   const handleUpvote = (commentId) => {
     updateCommentVotes(commentId, 1).catch((err) => {
-      alert("Sorry, your comment vote could not be posted. Please try again");
+      alert(
+        "Sorry, your comment vote could not be posted. Please refresh the page and try again"
+      );
     });
     optRenderCommentVotes(commentId, 1, comments, setComments);
   };
 
   const handleDownvote = (commentId) => {
     updateCommentVotes(commentId, -1).catch((err) => {
-      alert("Sorry, your comment vote could not be posted. Please try again");
+      alert(
+        "Sorry, your comment vote could not be posted. Please refresh the page and try again"
+      );
     });
     optRenderCommentVotes(commentId, -1, comments, setComments);
   };
@@ -35,7 +39,7 @@ const Comments = ({ articleId }) => {
   const handleCommentDelete = (commentId, currComments, setComments) => {
     deleteComment(commentId).catch((err) =>
       alert(
-        "Your comment could not be deleted. Please refresh the page and try again"
+        "Sorry, your comment could not be deleted. Please refresh the page and try again"
       )
     );
     optRenderCommentDelete(currComments, commentId, setComments);
@@ -72,23 +76,35 @@ const Comments = ({ articleId }) => {
             onChange={(e) => {
               setNewComment(e.target.value);
             }}
-          />
+            required
+          ></textarea>
           <button
             type="submit"
             className="comment-button"
             onClick={(e) => {
               e.preventDefault();
-              postComment(articleId, user.username, newComment).catch((err) => {
-                alert(
-                  "Sorry - your comment could not be posted at this time; please try again later."
+              if (newComment !== "") {
+                postComment(articleId, user.username, newComment)
+                  .catch((err) => {
+                    alert(
+                      "Sorry - your comment could not be posted at this time; please try again later."
+                    );
+                  })
+                  .then(() => {
+                    return getArticleComments(articleId);
+                  })
+                  .then((updatedComments) => {
+                    setComments(updatedComments);
+                  });
+                optRenderComment(
+                  comments,
+                  newComment,
+                  user.username,
+                  setComments
                 );
-              });
-              optRenderComment(
-                comments,
-                newComment,
-                user.username,
-                setComments
-              );
+              } else {
+                alert("Comments cannot be blank");
+              }
               setNewComment("");
             }}
           >
