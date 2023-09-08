@@ -10,6 +10,7 @@ import AllUsers from "./pages/AllUsers";
 import ArticlesByCategory from "./pages/ArticlesByCategory";
 import PathNotFound from "./pages/PathNotFound";
 import Footer from "./features/Footer";
+import RelatedArticles from "./features/RelatedArticles";
 
 export {
   Home,
@@ -24,4 +25,5 @@ export {
   ArticlesByCategory,
   PathNotFound,
   Footer,
+  RelatedArticles,
 };

@@ -13,9 +13,11 @@ const Header = () => {
   return (
     <section className="header container">
       <div className="title-container">
-        <h1 id="top" className="nav-title">
-          MSMI News
-        </h1>
+        <Link to="/">
+          <h1 id="top" className="nav-title">
+            MSMI News
+          </h1>
+        </Link>
         <Link className="logged-in-user" to="/users">
           <div className="img-cropper">
             <img
@@ -32,15 +34,11 @@ const Header = () => {
           <Link className="nav-item" to="/">
             Home
           </Link>
-          <Link className="news nav-item" to="/articles">
-            All Articles
-          </Link>
           <div
             className={`dropdown nav-item ${dropdownOpen ? "open" : ""}`}
             onClick={toggleDropdown}
-            onMouseLEave={toggleDropdown}
           >
-            <p className="nav-item">Topics</p>
+            <Link className="nav-item">Topics</Link>
             <div className={`dropdown-content ${dropdownOpen ? "show" : ""}`}>
               <Link className="news nav-item" to="/articles/topic/football">
                 Football
@@ -53,6 +51,9 @@ const Header = () => {
               </Link>
             </div>
           </div>
+          <Link className="news nav-item" to="/articles">
+            All Articles
+          </Link>
         </nav>
       </div>
     </section>

@@ -7,7 +7,7 @@ import {
   updateArticleVotes,
 } from "../apiCalls";
 import { Link } from "react-router-dom";
-import { Comments, UserContext } from "../";
+import { Comments, UserContext, RelatedArticles } from "../";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -50,7 +50,8 @@ const SingleArticle = () => {
       });
   }, []);
 
-  if (isLoading) return <h3 className="loading-message">Loading...</h3>;
+  if (isLoading)
+    return <h3 className="loading-message container">Loading...</h3>;
   if (isError) {
     return (
       <section className="article error">
@@ -67,48 +68,59 @@ const SingleArticle = () => {
           <h1 className="single-article h1">{article.title}</h1>
           <p className="single-article topic">{article.topic}</p>
         </div>
-        <img
-          src={article.article_img_url}
-          alt={`${article.title} image`}
-          className="single-article image"
-        />
+        <div className="article-and-image">
+          <img
+            src={article.article_img_url}
+            alt={`${article.title} image`}
+            className="single-article image"
+          />
+          <div className="single-article body">
+            <p>{article.body}</p>
+          </div>
+        </div>
         <div className="single-article info-box">
-          <Link>
-            <p className="single-article author">{author.name}</p>
-          </Link>
-          <p className="single-article date">
-            Published:{" "}
-            {new Date(article.created_at).toLocaleDateString({
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
-          <p className="single-article votes">Article votes: {article.votes}</p>
-          <button
-            className="upvote-button"
-            onClick={(e) => {
-              e.currentTarget.disabled = true;
-              handleArticleUpvote();
-            }}
-          >
-            Upvote 👍
-          </button>
-          <button
-            className="downvote-button"
-            onClick={(e) => {
-              e.currentTarget.disabled = true;
-              handleArticleDownvote();
-            }}
-          >
-            Downvote 👎
-          </button>
+          <div className="article-data">
+            <p className="single-article author">
+              Written by <span className="bold">{author.name}</span>
+            </p>
+            <p className="single-article date">
+              {new Date(article.created_at).toLocaleDateString({
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+            <p className="single-article votes">
+              <span className="bold">{article.votes}</span> Votes
+            </p>
+            <div className="article-votes button">
+              <button
+                className="upvote-button"
+                onClick={(e) => {
+                  e.currentTarget.disabled = true;
+                  handleArticleUpvote();
+                }}
+              >
+                Upvote 👍
+              </button>
+              <button
+                className="downvote-button"
+                onClick={(e) => {
+                  e.currentTarget.disabled = true;
+                  handleArticleDownvote();
+                }}
+              >
+                Downvote 👎
+              </button>
+            </div>
+          </div>
+          <div className="related-articles">
+            <RelatedArticles topic={article.topic} />
+          </div>
         </div>
       </div>
-      <div className="single-article body">
-        <p>{article.body}</p>
-      </div>
+
       <h2 className="comments-h2">Comments</h2>
       <Comments articleId={article_id} />
     </section>

@@ -79,38 +79,40 @@ const Comments = ({ articleId }) => {
             maxLength={"500"}
             required
           ></textarea>
-          <button
-            type="submit"
-            className="comment-button"
-            onClick={(e) => {
-              e.preventDefault();
-              if (newComment !== "") {
-                postComment(articleId, user.username, newComment)
-                  .then(() => {
-                    return getArticleComments(articleId);
-                  })
-                  .then((updatedComments) => {
-                    setComments(updatedComments);
-                  })
-                  .catch((err) => {
-                    alert(
-                      "Sorry - your comment could not be posted at this time; please try again later."
-                    );
-                  });
-                optRenderComment(
-                  comments,
-                  newComment,
-                  user.username,
-                  setComments
-                );
-              } else {
-                alert("Comments cannot be blank");
-              }
-              setNewComment("");
-            }}
-          >
-            Post comment
-          </button>
+          <div className="post-comment-flex">
+            <button
+              type="submit"
+              className="post-comment-button"
+              onClick={(e) => {
+                e.preventDefault();
+                if (newComment !== "") {
+                  postComment(articleId, user.username, newComment)
+                    .then(() => {
+                      return getArticleComments(articleId);
+                    })
+                    .then((updatedComments) => {
+                      setComments(updatedComments);
+                    })
+                    .catch((err) => {
+                      alert(
+                        "Sorry - your comment could not be posted at this time; please try again later."
+                      );
+                    });
+                  optRenderComment(
+                    comments,
+                    newComment,
+                    user.username,
+                    setComments
+                  );
+                } else {
+                  alert("Comments cannot be blank");
+                }
+                setNewComment("");
+              }}
+            >
+              Post comment
+            </button>
+          </div>
         </form>
       </section>
       <section className="list-comments">
@@ -122,40 +124,50 @@ const Comments = ({ articleId }) => {
               <li key={comment.comment_id} className="comment-card">
                 <h4 className="commenter-name">@{comment.author}</h4>
                 <p className="comment-posted">
-                  {getTimeSince(comment.created_at)}
+                  <span className="date-color">
+                    {getTimeSince(comment.created_at)}
+                  </span>
                 </p>
                 <p className="comment-body">{comment.body}</p>
-                <p className="comment-votes">Votes: {comment.votes}</p>
-                <button
-                  onClick={() => {
-                    handleUpvote(comment.comment_id);
-                  }}
-                  className="comment-upvote"
-                >
-                  👍
-                </button>
-                <button
-                  onClick={() => {
-                    handleDownvote(comment.comment_id);
-                  }}
-                  className="comment-downvote"
-                >
-                  👎
-                </button>
-                {isOwnComment ? (
-                  <button
-                    className="comment-delete"
-                    onClick={() => {
-                      handleCommentDelete(
-                        comment.comment_id,
-                        comments,
-                        setComments
-                      );
-                    }}
-                  >
-                    Delete comment
-                  </button>
-                ) : null}
+                <p className="comment-votes">
+                  <span className="bold">{comment.votes}</span> votes
+                </p>
+                <div className="comment-button-flex">
+                  <div className="comment-vote-buttons">
+                    <button
+                      onClick={() => {
+                        handleUpvote(comment.comment_id);
+                      }}
+                      className="comment-upvote"
+                    >
+                      👍
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDownvote(comment.comment_id);
+                      }}
+                      className="comment-downvote"
+                    >
+                      👎
+                    </button>
+                  </div>
+                  <div className="comment-delete-button">
+                    {isOwnComment ? (
+                      <button
+                        className="comment-delete"
+                        onClick={() => {
+                          handleCommentDelete(
+                            comment.comment_id,
+                            comments,
+                            setComments
+                          );
+                        }}
+                      >
+                        Delete comment
+                      </button>
+                    ) : null}
+                  </div>
+                </div>
               </li>
             );
           })}

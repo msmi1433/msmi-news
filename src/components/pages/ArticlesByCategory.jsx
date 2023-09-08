@@ -47,11 +47,19 @@ const ArticlesByCategory = () => {
     <section className="all-articles container">
       <h2 className="page-heading">{category} news</h2>
       <div className="input-container">
-        <button className="page-button" onClick={handlePrevClick}>
+        <button
+          disabled={pageNumber === 1 ? true : false}
+          className="page-button"
+          onClick={handlePrevClick}
+        >
           Previous page
         </button>
         <p className="page-number">{`Page ${pageNumber} of ${numOfPages}`}</p>
-        <button className="page-button" onClick={handleNextClick}>
+        <button
+          disabled={pageNumber === numOfPages ? true : false}
+          className="page-button"
+          onClick={handleNextClick}
+        >
           Next page
         </button>
       </div>
