@@ -60,7 +60,6 @@ const ArticlesByCategory = () => {
         categoryState={categoryState}
         setErrStatus={setErrStatus}
       />
-
       <div className="back-to-top-container">
         <a href="#top">
           <button className="back-to-top">Back to top</button>

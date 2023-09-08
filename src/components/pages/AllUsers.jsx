@@ -69,6 +69,11 @@ const AllUsers = () => {
           );
         })}
       </ol>
+      <div className="back-to-top-container">
+        <a href="#top">
+          <button className="back-to-top">Back to top</button>
+        </a>
+      </div>
     </section>
   );
 };

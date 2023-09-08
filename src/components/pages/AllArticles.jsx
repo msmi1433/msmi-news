@@ -32,17 +32,25 @@ const AllArticles = () => {
     <section className="all-articles container">
       <h2 className="page-heading">All Articles</h2>
       <div className="input-container">
-        <button className="page-button" onClick={handlePrevClick}>
+        <button
+          className="page-button"
+          onClick={handlePrevClick}
+          disabled={pageNumber === 1 ? true : false}
+        >
           Previous page
         </button>
         <p className="page-number">{`Page ${pageNumber} of ${numOfPages}`}</p>
-        <button className="page-button" onClick={handleNextClick}>
+        <button
+          className="page-button"
+          onClick={handleNextClick}
+          disabled={pageNumber === numOfPages ? true : false}
+        >
           Next page
         </button>
       </div>
-      <div>
-        <ArticleContainer pageNumber={pageNumber} />
-      </div>
+
+      <ArticleContainer pageNumber={pageNumber} />
+
       <div className="back-to-top-container">
         <a href="#top">
           <button className="back-to-top">Back to top</button>

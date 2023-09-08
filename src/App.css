@@ -43,6 +43,10 @@ ol {
   }
 }
 
+.hide-button {
+  visibility: hidden;
+}
+
 /* Header */
 
 .header.container {
@@ -199,7 +203,7 @@ h2 {
 .all-articles .articles-ol {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -290,12 +294,22 @@ h2 {
 .users-flex-container {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: center;
   gap: 20px;
 }
 
 .user-card {
   text-align: center;
+}
+
+@media (max-width: 900px) {
+  .users-flex-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2.5em;
+  }
 }
 
 .user-login-img-container {
