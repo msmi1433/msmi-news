@@ -35,7 +35,7 @@ const Header = () => {
           </Link>
           <div
             className={`dropdown nav-item ${dropdownOpen ? "open" : ""}`}
-            onMouseEnter={toggleDropdown}
+            onClick={toggleDropdown}
             onMouseLeave={toggleDropdown}
           >
             <p className="nav-item">Topics</p>

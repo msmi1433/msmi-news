@@ -38,7 +38,7 @@ const AllArticles = () => {
         Next page
       </button>
       <ArticleContainer pageNumber={pageNumber} />
-      <p className="page-number">{`Page ${pageNumber}`}</p>
+      <p className="page-number">{`Page ${pageNumber} of ${numOfPages}`}</p>
     </section>
   );
 };

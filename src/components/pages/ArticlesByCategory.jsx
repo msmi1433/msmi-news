@@ -57,7 +57,7 @@ const ArticlesByCategory = () => {
         categoryState={categoryState}
         setErrStatus={setErrStatus}
       />
-      <p className="page-number">{`Page ${pageNumber}`}</p>
+      <p className="page-number">{`Page ${pageNumber} of ${numOfPages}`}</p>
     </section>
   );
 };
