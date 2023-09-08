@@ -9,6 +9,7 @@ import { UserContext } from "./contexts/UserContext";
 import AllUsers from "./pages/AllUsers";
 import ArticlesByCategory from "./pages/ArticlesByCategory";
 import PathNotFound from "./pages/PathNotFound";
+import Footer from "./features/Footer";
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   AllUsers,
   ArticlesByCategory,
   PathNotFound,
+  Footer,
 };

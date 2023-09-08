@@ -9,6 +9,7 @@ import {
   AllUsers,
   ArticlesByCategory,
   PathNotFound,
+  Footer,
 } from "./components";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/users" element={<AllUsers />} />
         <Route path="*" element={<PathNotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

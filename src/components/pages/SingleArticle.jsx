@@ -66,12 +66,12 @@ const SingleArticle = () => {
         <div className="single-article title">
           <h1 className="single-article h1">{article.title}</h1>
           <p className="single-article topic">{article.topic}</p>
-          <img
-            src={article.article_img_url}
-            alt={`${article.title} image`}
-            className="single-article image"
-          />
         </div>
+        <img
+          src={article.article_img_url}
+          alt={`${article.title} image`}
+          className="single-article image"
+        />
         <div className="single-article info-box">
           <Link>
             <p className="single-article author">{author.name}</p>
