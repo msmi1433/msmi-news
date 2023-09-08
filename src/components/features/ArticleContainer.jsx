@@ -36,7 +36,7 @@ const ArticleContainer = ({ pageNumber, categoryState, setErrStatus }) => {
   return (
     <section className="article-container">
       {pathname !== "/" ? (
-        <>
+        <div className="sort-order-container">
           <select
             defaultValue={sortBy}
             className="sort-by selector"
@@ -58,7 +58,7 @@ const ArticleContainer = ({ pageNumber, categoryState, setErrStatus }) => {
             <option value="DESC">Descending</option>
             <option value="ASC">Ascending</option>
           </select>
-        </>
+        </div>
       ) : null}
       <ol className="articles-ol">
         {articleList.map((article) => {
@@ -74,15 +74,15 @@ const ArticleContainer = ({ pageNumber, categoryState, setErrStatus }) => {
                   alt={`${article.title} image`}
                   className="article-img"
                 />
+                <div className="article-card-header">
+                  <p className="article-created-at">
+                    {new Date(article.created_at).toLocaleDateString()}
+                  </p>
+                  <p>&nbsp;|&nbsp;</p>
+                  <p className="article-topic">{article.topic}</p>
+                </div>
                 <h3 className="article-title">{article.title}</h3>
               </li>
-              <div className="article-card-footer">
-                <p className="article-created-at">
-                  {new Date(article.created_at).toLocaleDateString()}
-                </p>
-                <p>&nbsp;|&nbsp;</p>
-                <p className="article-topic">{article.topic}</p>
-              </div>
             </Link>
           );
         })}

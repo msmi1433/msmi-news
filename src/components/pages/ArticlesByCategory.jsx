@@ -46,18 +46,26 @@ const ArticlesByCategory = () => {
   return (
     <section className="all-articles container">
       <h2 className="page-heading">{category} news</h2>
-      <button className="page-button" onClick={handlePrevClick}>
-        Previous page
-      </button>
-      <button className="page-button" onClick={handleNextClick}>
-        Next page
-      </button>
+      <div className="input-container">
+        <button className="page-button" onClick={handlePrevClick}>
+          Previous page
+        </button>
+        <p className="page-number">{`Page ${pageNumber} of ${numOfPages}`}</p>
+        <button className="page-button" onClick={handleNextClick}>
+          Next page
+        </button>
+      </div>
       <ArticleContainer
         pageNumber={pageNumber}
         categoryState={categoryState}
         setErrStatus={setErrStatus}
       />
-      <p className="page-number">{`Page ${pageNumber} of ${numOfPages}`}</p>
+
+      <div className="back-to-top-container">
+        <a href="#top">
+          <button className="back-to-top">Back to top</button>
+        </a>
+      </div>
     </section>
   );
 };

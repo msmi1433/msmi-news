@@ -76,6 +76,7 @@ const Comments = ({ articleId }) => {
             onChange={(e) => {
               setNewComment(e.target.value);
             }}
+            maxLength={"500"}
             required
           ></textarea>
           <button
@@ -85,16 +86,16 @@ const Comments = ({ articleId }) => {
               e.preventDefault();
               if (newComment !== "") {
                 postComment(articleId, user.username, newComment)
-                  .catch((err) => {
-                    alert(
-                      "Sorry - your comment could not be posted at this time; please try again later."
-                    );
-                  })
                   .then(() => {
                     return getArticleComments(articleId);
                   })
                   .then((updatedComments) => {
                     setComments(updatedComments);
+                  })
+                  .catch((err) => {
+                    alert(
+                      "Sorry - your comment could not be posted at this time; please try again later."
+                    );
                   });
                 optRenderComment(
                   comments,
