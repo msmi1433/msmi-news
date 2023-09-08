@@ -34,12 +34,11 @@ const Header = () => {
           <Link className="nav-item" to="/">
             Home
           </Link>
-
           <div
             className={`dropdown nav-item ${dropdownOpen ? "open" : ""}`}
             onClick={toggleDropdown}
           >
-            <p className="nav-item">Topics</p>
+            <Link className="nav-item">Topics</Link>
             <div className={`dropdown-content ${dropdownOpen ? "show" : ""}`}>
               <Link className="news nav-item" to="/articles/topic/football">
                 Football

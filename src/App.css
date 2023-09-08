@@ -16,6 +16,7 @@ a:visited {
 
 a:hover {
   box-shadow: black;
+  border: 1;
 }
 
 body {
@@ -29,6 +30,45 @@ h1 {
 
 h3 {
   font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.date-color {
+  color: rgb(128, 120, 120);
+  font-size: 0.9rem;
+}
+
+button {
+  border-radius: 5px;
+  border: 0;
+  padding: 3px;
+  transition: 0.3s;
+  background-color: white;
+  color: black;
+  border: black 1px solid;
+}
+
+button:hover {
+  background-color: rgb(192, 179, 179);
+  color: black;
+  border: 1px solid transparent;
+}
+
+button:active {
+  color: black;
+  background-color: white;
+}
+
+button:disabled {
+  color: white;
+  background-color: rgb(158, 151, 151);
+}
+
+.bottom {
+  padding: 20px;
 }
 
 /* Global */
@@ -58,7 +98,7 @@ ol {
 .back-to-top-container {
   display: flex;
   justify-content: center;
-  margin: 10px 0px 10px 0px;
+  margin: 10px 0px 0px 0px;
 }
 
 @media (min-width: 900px) {
@@ -74,7 +114,7 @@ ol {
 /* Header */
 
 .header.container {
-  padding: 30px 0px 0px 0px;
+  padding: 30px 0px 10px 0px;
 }
 
 .title-container {
@@ -87,6 +127,7 @@ ol {
   justify-content: center;
   padding: 0px 0px 10px 0px;
   gap: 24px;
+  font-weight: 600;
 }
 
 .navbar-container {
@@ -94,6 +135,10 @@ ol {
   display: flex;
   gap: 60px;
   padding: 10px 0px;
+}
+
+.nav-item {
+  font-size: 1rem;
 }
 
 h2 {
@@ -131,6 +176,7 @@ h2 {
 }
 
 .dropdown {
+  align-self: center;
   position: relative;
 }
 
@@ -138,13 +184,37 @@ h2 {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
   min-width: 160px;
   z-index: 1;
 }
 
-.dropdown:hover .dropdown-content.show {
-  display: block;
+.dropdown .dropdown-content.show {
+  margin-top: 0.6px;
+  display: flex;
+  gap: 10px;
+  left: 50% !important;
+  right: auto !important;
+  text-align: center !important;
+  transform: translate(-50%, 0) !important;
+}
+
+.nav-container a {
+  padding: 2px 4px 2px 4px;
+}
+
+.nav-container a:hover {
+  padding: 2px 4px 2px 4px;
+  color: rgb(98, 89, 89);
+  text-decoration: underline 2px;
+}
+
+.nav-container a:visited {
+  text-decoration: none;
+}
+
+a.logged-in-user:hover {
+  color: rgb(98, 89, 89);
+  text-decoration: underline 2px;
 }
 
 /* Footer */
@@ -219,7 +289,10 @@ h2 {
   .home-grid {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 1em;
+  }
+  .article-card-link {
+    max-width: 96%;
   }
 
   .article-card {
@@ -266,18 +339,41 @@ h2 {
   grid-column: 1/2;
 }
 
-.single-article.image {
+.article-and-image {
   grid-row: 2;
+  grid-column: 1;
+  width: 90%;
+}
+
+.single-article.image {
   width: 100%;
+}
+
+.single-article.body {
+  width: 95%;
 }
 
 .single-article.info-box {
   grid-row: 2;
-  margin-left: 30px;
+  grid-column: 2;
+  margin-left: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+.related-articles {
+  grid-row: 2;
+  grid-column: 2;
 }
 
 .single-article.body {
   margin: 10px 0px 10px 0px;
+}
+
+.article-votes,
+.button {
+  display: flex;
+  gap: 8px;
 }
 
 @media (max-width: 900px) {
@@ -299,6 +395,22 @@ h2 {
   .single-article.info-box {
     margin: 10px 0px 0px 0px;
   }
+
+  .related-articles {
+    visibility: hidden;
+    height: 0;
+  }
+}
+
+.related-articles-container > .articles-ol {
+  display: flex !important;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.related-article-card:hover {
+  color: rgb(95, 85, 85);
+  transition: 0.2s ease-in-out;
 }
 
 /* Comments */
@@ -306,16 +418,49 @@ h2 {
   display: flex;
   flex-flow: column;
   gap: 1.5em;
+  margin-top: 10px;
+}
+
+.post-comment-button {
+  position: relative;
+  right: 0;
 }
 
 .comments-ol {
   display: flex;
   flex-flow: column;
+  align-items: center;
   gap: 1.5em;
 }
 
 .comment-input {
   width: 100%;
+}
+
+.comment-card {
+  width: 95%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.comment-button-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-vote-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.comment-input {
+  margin-bottom: 3px;
+}
+
+.post-comment-flex {
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* Users page */
