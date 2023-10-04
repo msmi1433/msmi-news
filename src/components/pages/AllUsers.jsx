@@ -58,7 +58,7 @@ const AllUsers = () => {
               </div>
               <p className="users-username">{user.username}</p>
               <button
-                className="user-login button"
+                className="user-login-button button"
                 onClick={(e) => {
                   logIn(user.username);
                 }}

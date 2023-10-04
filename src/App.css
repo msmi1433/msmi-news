@@ -476,6 +476,9 @@ a.logged-in-user:hover {
 
 .user-card {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 @media (max-width: 900px) {
@@ -513,6 +516,10 @@ a.logged-in-user:hover {
 .user-login.button {
   margin: 2.5px;
   padding: 5px;
+}
+
+.user-login-button {
+  align-self: center;
 }
 
 /* Articles container */
