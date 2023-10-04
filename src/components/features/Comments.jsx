@@ -135,7 +135,8 @@ const Comments = ({ articleId }) => {
                 <div className="comment-button-flex">
                   <div className="comment-vote-buttons">
                     <button
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.currentTarget.disabled = true;
                         handleUpvote(comment.comment_id);
                       }}
                       className="comment-upvote"
@@ -143,7 +144,8 @@ const Comments = ({ articleId }) => {
                       👍
                     </button>
                     <button
-                      onClick={() => {
+                      onClick={(e) => {
+                        e.currentTarget.disabled = true;
                         handleDownvote(comment.comment_id);
                       }}
                       className="comment-downvote"

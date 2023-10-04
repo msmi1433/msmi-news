@@ -126,8 +126,9 @@ ol {
   flex-direction: row;
   justify-content: center;
   padding: 0px 0px 10px 0px;
-  gap: 24px;
+  gap: 22px;
   font-weight: 600;
+  text-align: center;
 }
 
 .navbar-container {
@@ -139,6 +140,7 @@ ol {
 
 .nav-item {
   font-size: 1rem;
+  align-self: center;
 }
 
 h2 {
@@ -189,7 +191,7 @@ h2 {
 }
 
 .dropdown .dropdown-content.show {
-  margin-top: 0.6px;
+  margin-top: 2.5px;
   display: flex;
   gap: 10px;
   left: 50% !important;
@@ -204,7 +206,7 @@ h2 {
 
 .nav-container a:hover {
   padding: 2px 4px 2px 4px;
-  color: rgb(98, 89, 89);
+  color: rgb(117, 104, 104);
   text-decoration: underline 2px;
 }
 
@@ -213,7 +215,7 @@ h2 {
 }
 
 a.logged-in-user:hover {
-  color: rgb(98, 89, 89);
+  color: rgb(117, 104, 104);
   text-decoration: underline 2px;
 }
 
@@ -552,6 +554,13 @@ a.logged-in-user:hover {
 }
 
 .pop-article-card:hover {
-  color: rgb(95, 85, 85);
-  transition: 0.2s ease-in-out;
+  color: rgb(117, 104, 104);
+}
+
+.pop-article-card:hover .pop-article-title {
+  text-decoration: underline 2px;
+}
+
+.pop-article-topic {
+  text-transform: capitalize;
 }

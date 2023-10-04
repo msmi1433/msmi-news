@@ -84,12 +84,14 @@ const SingleArticle = () => {
               Written by <span className="bold">{author.name}</span>
             </p>
             <p className="single-article date">
-              {new Date(article.created_at).toLocaleDateString({
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
+              <span className="bold">
+                {new Date(article.created_at).toLocaleDateString({
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </span>
             </p>
             <p className="single-article votes">
               <span className="bold">{article.votes}</span> Votes

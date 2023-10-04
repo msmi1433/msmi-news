@@ -32,7 +32,7 @@ const RelatedArticles = ({ topic }) => {
           return (
             <Link
               to={`/articles/${article.article_id}`}
-              className="related-article-card"
+              className="pop-article-card"
               key={article.article_id}
             >
               <h3 className="pop-article-title">{article.title}</h3>
