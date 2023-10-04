@@ -48,7 +48,7 @@ const SingleArticle = () => {
         setIsError(true);
         setIsLoading(false);
       });
-  }, []);
+  }, [article_id]);
 
   if (isLoading)
     return <h3 className="loading-message container">Loading...</h3>;
@@ -118,7 +118,7 @@ const SingleArticle = () => {
             </div>
           </div>
           <div className="related-articles">
-            <RelatedArticles topic={article.topic} />
+            <RelatedArticles topic={article.topic} id={article.article_id} />
           </div>
         </div>
       </div>

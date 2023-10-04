@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import { getArticles } from "../apiCalls";
 import { Link } from "react-router-dom";
 
-const RelatedArticles = ({ topic }) => {
+const RelatedArticles = ({ topic, id }) => {
   const [relatedArticles, setRelatedArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  console.log(topic);
   useEffect(() => {
     setIsLoading(true);
     getArticles(undefined, undefined, topic, undefined)
       .then((articles) => {
-        return articles.slice(0, 5);
+        const filterCurrentArticle = articles.filter(
+          (article) => article.article_id !== id
+        );
+        return filterCurrentArticle.slice(0, 5);
       })
       .then((slicedArticles) => {
         setIsLoading(false);
@@ -23,6 +25,21 @@ const RelatedArticles = ({ topic }) => {
         setIsLoading(false);
       });
   }, []);
+
+  console.log(id);
+
+  if (isLoading)
+    return (
+      <section className="related-articles-container">
+        <h2>Related Articles</h2>
+        <p className="loading-message">Loading...</p>
+      </section>
+    );
+  if (isError)
+    <section className="related-articles-container">
+      <h2>Related Articles</h2>
+      <p className="error-message">Something went wrong - please try again</p>
+    </section>;
 
   return (
     <section className="related-articles-container">
